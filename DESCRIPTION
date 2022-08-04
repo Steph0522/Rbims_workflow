@@ -1,0 +1,45 @@
+Package: rbims
+Title: R Tools for Reconstruncting Bin Metabolisms
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Mirna",
+           family = "Vázquez-Rosas-Landa",
+           role = c("aut", "cre"),
+           email = "mirnavrl@gmail.com",
+           comment = c(ORCID = "0000-0002-6928-7930"))
+Description: This package is meant to be used for the analysis of microbial metabolism. rbims reads different database outputs and includes a new custom-curated database that the user can easily access. Its module-based design allows the user to choose between running the whole pipeline or just part of it. Finally, a key feature is that it facilitates the incorporation of metadata such as taxonomy and sampling data, allowing the user to answer specific questions of biological relevance.
+License: GPL (>= 3) + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Suggests: 
+    knitr,
+    rmarkdown,
+    spelling
+VignetteBuilder: knitr
+biocViews:
+    KEGGREST
+Imports:
+    KEGGREST,
+    dplyr,
+    factoextra,
+    ggplot2,
+    janitor,
+    pheatmap,
+    readr,
+    stringr,
+    tibble,
+    tidyr,
+    rlang,
+    pals,
+    magrittr,
+    prettydoc,
+    ComplexHeatmap,
+    stats,
+    Cairo,
+    purrr,
+    writexl
+Language: en-US
+URL: https://github.com/mirnavazquez/RbiMs
+BugReports: https://github.com/mirnavazquez/RbiMs/issues
