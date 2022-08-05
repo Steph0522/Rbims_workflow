@@ -1,48 +1,65 @@
-data_dbcan<-"inst/extdata/test_data/Prueba1_Bin_154_2_1.fna.faaoverview.txt"
-dbcan_table<- data_dbcan
+#' @title Read the output of KofamScan/KofamKoala or KAAS.
+#' @description read_ko calculates the abundance of each KO within the 
+#' bins based on the KofamScan or KofamKoala output.
+#' @usage read_ko(data_kofam=NULL, data_kaas=NULL, data_interpro=NULL)
+#' @param data_kofam a path where KofamScan/KofamKoala output data are. They 
+#' should have the extension .txt and all files in the path are the ones that
+#' need to be read. Output data should have 5 columns with the bin names 
+#' followed by the scaffold name divided by a '-' or '_': bin_scaffoldXX.
+#' @param data_kaas a data frame with 2 columns. Contigs are expected to 
+#' indicate in their names the bin name followed by the scaffold name 
+#' divided by a '-' or '_': bin_scaffoldXX. 
+#' @param data_interpro a data frame output of read_interpro. This
+#' argument is used within mapping_KO.
+#' @details This function is part of a package used for the analysis 
+#' of bins metabolism.
+#' @import dplyr tidyr readr stringr rlang
+#' @importFrom utils read.table
+#' @importFrom purrr map_dfr 
+#' @examples
+#' \dontrun{
+#' read_ko("C:/Users/bins/")
+#' }
+#' @export
 
-path<- "/home/yendi/Documents/CURSO_CDBS/Rbims_workflow/inst/extdata/test_data/"
 read_dbcan<-function(dbcan_path){
   ruta_dbcan<-dbcan_path
-  ###################### Load all the data tables results ############################
-  lapply_read_delim_bind_rows <- function(path, pattern = "*overview.txt") {
+  # Load all the data tables results ---------------------------------------####
+  lapply_read_delim_bind_rows <- function(path, pattern = "*overview.txt"){
     files = list.files(path, pattern, full.names = TRUE)
     lapply(files, read_delim, delim="\t") %>% bind_rows()
   }
   dbcan_df<-lapply_read_delim_bind_rows(ruta_dbcan)
-  library("readr")
-  library(dplyr)
-  library(tidyr)
-  library(stringr)
-  #reading data
-  dbcan_df_format<- suppressWarnings(dbcan_df %>%
-                                       filter( `#ofTools` >1) %>%
-                                       rename(Bin_name=`Gene ID`) %>%
-                                     #  separate(.data$`Gene ID`, c("Bin_name", "Scaffold_name"),
-                                      #          sep = "[_|-][s|S]caffold") %>%
-                                      # mutate(Scaffold_name = paste0( "scaffold", .data$Scaffold_name),
-                                       #       .data$Scaffold_name) %>%
-                                       #unite("Scaffold_name", c("Bin_name", "Scaffold_name"), remove=FALSE) %>%
-                                       mutate(hmmer2=str_replace_all(HMMER, "[[:punct:]]", "\t")) %>%
-                                       separate(hmmer2, c("dbNamesHMM"), sep="\t") %>%
-                                       mutate(hotpep2=str_replace_all(Hotpep, "[[:punct:]]", "\t")) %>%
-                                       separate(hotpep2, c("dbNameshotpep"), sep="\t") %>%
-                                       mutate(diamond2=str_replace_all(DIAMOND, "[[:punct:]]", "\t")) %>%
-                                       separate(diamond2, c("dbNamesdiamond"), sep="\t") %>%
-                                       unite("dbCAN_names", dbNamesHMM, dbNameshotpep, dbNamesdiamond, sep="_", remove = F) %>%
-                                       mutate(dbCAN_names=str_replace_all(dbCAN_names, "^_", "")) %>%
-                                       separate(dbCAN_names, c("dbCAN_names"), sep="_") %>%
-                                       mutate(dbCAN = case_when(
-                                         str_detect(dbCAN_names, "CBM") ~ "carbohydrate-binding module [CBM]",
-                                         str_detect(dbCAN_names, "CE") ~ "carbohydrate esterases [CEs]",
-                                         str_detect(dbCAN_names, "GH") ~ "glycoside hydrolases [GHs]",
-                                         str_detect(dbCAN_names, "GT") ~ "glycosyltransferases [GTs]",
-                                         str_detect(dbCAN_names, "PL") ~ "polysaccharide lyases [PLs]"
-                                       ))   %>%
-                                       mutate(across(where(is.character), str_trim))) %>% dplyr::select(
-                                          Bin_name,dbCAN_names) %>% calc_abundance(analysis = "dbCAN") %>% dplyr::select(-Scaffold_name)
-
-
+  # Reading data ----------------------------------------------------------####
+  dbcan_df_format<- suppressWarnings(
+    dbcan_df %>%
+      filter( `#ofTools` >1) %>%
+      rename(Bin_name=`Gene ID`) %>%
+      mutate( hmmer2=str_replace_all(HMMER, "[[:punct:]]",  "\t")) %>%
+      separate(hmmer2, c("dbNamesHMM"),  sep="\t") %>%
+      mutate(hotpep2=str_replace_all(Hotpep, "[[:punct:]]", "\t")) %>%
+      separate(hotpep2, c("dbNameshotpep"), sep="\t") %>%
+      mutate(diamond2=str_replace_all(DIAMOND, "[[:punct:]]", "\t")) %>%
+      separate(diamond2, c("dbNamesdiamond"),msep="\t") %>%
+      nite("dbCAN_names", dbNamesHMM, dbNameshotpep,  dbNamesdiamond, 
+           sep="_", remove = F) %>%  
+      mutate(dbCAN_names=str_replace_all(dbCAN_names, "^_", "")) %>%
+      separate(dbCAN_names, c("dbCAN_names"), sep="_") %>%
+      utate(dbCAN = case_when(str_detect(dbCAN_names, "CBM") ~ 
+                                "carbohydrate-binding module [CBM]",
+                              str_detect(dbCAN_names, "CE") ~ 
+                                "carbohydrate esterases [CEs]",
+                              str_detect(dbCAN_names, "GH") ~ 
+                                "glycoside hydrolases [GHs]",
+                              str_detect(dbCAN_names, "GT") ~ 
+                                "glycosyltransferases [GTs]",
+                              str_detect(dbCAN_names, "PL") ~ 
+                                "polysaccharide lyases [PLs]"))  %>%
+      mutate(across(where(is.character), str_trim))) %>%
+    dplyr::select(Bin_name,dbCAN_names) %>%
+    calc_abundance(analysis = "dbCAN") %>% 
+    dplyr::select(-Scaffold_name)
+  # Menssage --------------------------------------------------------------####
   initial<-dim(dbcan_df)
   final<-dim(dbcan_df %>%
                filter( `#ofTools` >1))
@@ -55,7 +72,4 @@ read_dbcan<-function(dbcan_path){
 
   return(dbcan_df_format)
 }
-
-
-  table_test<-read_dbcan(dbcan_path = path)
 
