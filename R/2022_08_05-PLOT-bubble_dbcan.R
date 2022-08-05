@@ -3,11 +3,11 @@
 #' @description Creates a bubble plot of dbCAN relative 
 #' abundance within each bin. 
 #' It uses the metadata information to color bubbles.
-#' @usage bubble_dbcan(tibble_dbcan, x_axis, y_axis,  
+#' @usage bubble_dbcan(tibble_ko, x_axis, y_axis,  
 #' data_experiment=NULL, color_character=NULL, order_bins=NULL,
 #' order_metabolism=NULL, color_pallet=NULL, range_size=NULL, 
 #' x_labs=TRUE, y_labs=TRUE, text_x=NULL, text_y=NULL)
-#' @param tibble_dbcan a tibble object, created with the read_dbcan 
+#' @param tibble_ko a tibble object, created with the read_dbcan 
 #' @param x_axis a string, a column name of the metabolism table. 
 #' It determined the x axis label.
 #' @param y_axis a string, a column name of the metabolism table. 
@@ -33,10 +33,10 @@
 #' @import ggplot2 dplyr rlang pals
 #' @examples
 #' \dontrun{
-#' bubble_dbcan(tibble_dbcan)
+#' bubble_dbcan(tibble_ko)
 #' }
 #' @noRd
-bubble_dbcan<-function(tibble_dbcan,
+bubble_dbcan<-function(tibble_ko,
                     x_axis, 
                     y_axis,
                     data_experiment=NULL,
@@ -93,12 +93,12 @@ bubble_dbcan<-function(tibble_dbcan,
   
   # Join data experiment --------------------------------------------------####
   if(is.null(data_experiment) == F){
-   tibble_dbcan<-tibble_dbcan %>%
+   tibble_ko<-tibble_ko %>%
       left_join(data_experiment, by="Bin_name")
   }
   # Checking the order ---------------------------------------------------####
   if(is.null(order_metabolism) == T){
-    order_metabolism<-tibble_dbcan %>%
+    order_metabolism<-tibble_ko %>%
       ungroup() %>%
       select({{y_axis_enquo}}) %>%
       distinct() %>%
@@ -106,7 +106,7 @@ bubble_dbcan<-function(tibble_dbcan,
   }
   # Checking the order ---------------------------------------------------####
   if(is.null(order_bins) == T){
-    order_bins<-sort(unique(tibble_dbcan$Bin_name))
+    order_bins<-sort(unique(tibble_ko$Bin_name))
   }
   # Checking experiment ---------------------------------------------------####
   if(is.null(data_experiment) == T){
@@ -120,7 +120,7 @@ bubble_dbcan<-function(tibble_dbcan,
   y_axis_label <- as_label(y_axis_enquo)
   # Plot ------------------------------------------------------------------####
   if(x_axis_label == "Bin_name") {
-    plot_bubble<-ggplot(tibble_dbcan,
+    plot_bubble<-ggplot(tibble_ko,
                         aes(x= factor(!!x_axis_enquo, 
                                       levels = !!order_bins),
                             y= factor(!!y_axis_enquo, 
@@ -139,7 +139,7 @@ bubble_dbcan<-function(tibble_dbcan,
       xlab(x_labs) + 
       ylab(y_axis_enquo)
   } else if (x_axis_label != "Bin_name" ) {
-    plot_bubble<-ggplot(tibble_dbcan,
+    plot_bubble<-ggplot(tibble_ko,
                         aes(x= factor(!!x_axis_enquo, 
                                       levels = !!order_metabolism),
                             y= factor(!!y_axis_enquo, 
