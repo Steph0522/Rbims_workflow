@@ -42,7 +42,7 @@ print(paste0("Input scaffolds = " , initial[1]))
 print(paste0("Output filtered = " , final[1]))
 print(paste0("Percentage remained = " , round(final[1]/initial[1]*100), "%"))
 print(paste0("Number of scaffolds with no signals = " , signals[2]))
-return(dbcan_df)
+return(dbcan_df_format)
 }
 
 table_test<-read_dbcan(dbcan_table = data_dbcan)
