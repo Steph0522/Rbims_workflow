@@ -13,14 +13,13 @@ need to be read. Output data should have 6 columns with the bin names
 followed by the Genes obtained in every algorithm (HMMER,Hotpep,DIAMOND),
 column 'Signalp' indcating if a Peptide signal is found and a column
 '#ofTools" indicating the number of algorithms that found this Gene.}
+
+\item{write}{logical. If TRUE then the dataframe generated will be saved in
+the directory you are currently working}
 }
 \description{
 read_dbcan3 calculates the abundance of each Gene within the
 bins based on the dbCAN output from run_dbcan3 V3.0.6.
-}
-\details{
-This function is part of a package used for the analysis
-of bins metabolism.
 }
 \examples{
 \dontrun{

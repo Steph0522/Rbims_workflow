@@ -43,7 +43,7 @@
 plot_bubble<-function(tibble_ko,
                       x_axis, 
                       y_axis,
-                      analysis=c("KEGG","INTERPRO"),
+                      analysis=c("KEGG","INTERPRO", "DBCAN"),
                       data_experiment=NULL,
                       calc=NULL,
                       color_character=NULL,
@@ -74,6 +74,16 @@ plot_bubble<-function(tibble_ko,
                       text_y=text_y)
   }else if (analysis == "INTERPRO") {
     bubble<-bubble_domain(tibble_ko=tibble_ko, x_axis=!!x_axis_enquo, 
+                          y_axis=!!y_axis_enquo, data_experiment=data_experiment, 
+                          color_character=!!color_character_enquo, 
+                          order_bins=order_bins, 
+                          order_metabolism=order_metabolism, 
+                          color_pallet=color_pallet, range_size=range_size, 
+                          x_labs=x_labs,
+                          y_labs=y_labs, text_x=text_x, text_y=text_y)
+    
+  }else if (analysis == "DBCAN") {
+    bubble<-bubble_dbcan3(tibble_ko=tibble_ko, x_axis=!!x_axis_enquo, 
                           y_axis=!!y_axis_enquo, data_experiment=data_experiment, 
                           color_character=!!color_character_enquo, 
                           order_bins=order_bins, 

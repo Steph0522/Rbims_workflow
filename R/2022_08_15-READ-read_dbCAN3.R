@@ -8,8 +8,8 @@
 #' followed by the Genes obtained in every algorithm (HMMER,Hotpep,DIAMOND), 
 #' column 'Signalp' indcating if a Peptide signal is found and a column 
 #' '#ofTools" indicating the number of algorithms that found this Gene. 
-#' @details This function is part of a package used for the analysis 
-#' of bins metabolism.
+#' @param write logical. If TRUE then the dataframe generated will be saved in 
+#' the directory you are currently working 
 #' @import dplyr tidyr readr stringr rlang tidyselect
 #' @examples
 #' \dontrun{
@@ -17,7 +17,7 @@
 #' }
 #' @export
 
-read_dbcan3<-function(dbcan_path){
+read_dbcan3<-function(dbcan_path, write=FALSE, matrix=FALSE){
   ruta_dbcan<-dbcan_path
   # Load all the data tables results ---------------------------------------####
   lapply_read_delim_bind_rows <- function(path, pattern = "*overview.txt"){
@@ -53,7 +53,28 @@ read_dbcan3<-function(dbcan_path){
       mutate_if(is.character, str_trim) %>%
       dplyr::select(.data$Bin_name, .data$dbCAN_names,.data$Signalp ) %>%
       calc_abundance(analysis = "dbCAN") %>% 
-      dplyr::select(-.data$Scaffold_name))
+      dplyr::select(-.data$Scaffold_name)) %>% group_by(
+        Bin_name,dbCAN, Signalp) %>% summarise_if(is.numeric, sum) #juntando
+  
+  # Reformating data ----------------------------------------------------------####
+  
+  dbcan_df_reformat<-dbcan_df_format %>%dplyr::select(
+    -Signalp) %>%
+    mutate(dbCAN_names = case_when(str_detect(.data$dbCAN, "CBM") ~ 
+                                     "carbohydrate-binding module [CBM]",
+                                   str_detect(.data$dbCAN, "CE") ~ 
+                                     "carbohydrate esterases [CEs]",
+                                   str_detect(.data$dbCAN, "GH") ~ 
+                                     "glycoside hydrolases [GHs]",
+                                   str_detect(.data$dbCAN, "GT") ~ 
+                                     "glycosyltransferases [GTs]",
+                                   str_detect(.data$dbCAN, "PL") ~ 
+                                     "polysaccharide lyases [PLs]")) %>% group_by(
+                                       dbCAN, Bin_name, dbCAN_names) %>% summarize_if(
+                                         is.numeric, sum) %>%   pivot_wider(
+                                           names_from = "Bin_name", values_from = "Abundance") %>% ungroup() %>% mutate_if(
+                                             is.numeric, ~replace(., is.na(.), 0)) 
+  
   # Menssage --------------------------------------------------------------####
   initial<-dim(dbcan_df)
   final<-dim(dbcan_df %>%
@@ -68,8 +89,19 @@ read_dbcan3<-function(dbcan_path){
   print(paste0("Number of genes with signals = " , sum(signals[-1,]$n)))
   print(paste0("Number of genes with signals that passed filtering = " , sum(signals2[-1,]$n)))
   
+  if(  write == TRUE) {
+    write_tsv(dbcan_df_format, "dbcan_output_formated.tsv")    
+    
+  } 
+  if(  matrix == TRUE) {
+    return(dbcan_df_format)
+    
+  }  else {
+    return(dbcan_df_reformat)
+    
+  } 
   
-  return(dbcan_df_format)
+
 }
 
 

@@ -1,13 +1,14 @@
-#' @title Bubble plot of dbCAN and its relative abundance 
+#' @title Bubble plot of PFAM/INTERPRO and its relative abundance 
 #' within each bin.
-#' @description Creates a bubble plot of dbCAN relative 
+#' @description Creates a bubble plot of PFAM/INTERPRO relative 
 #' abundance within each bin. 
 #' It uses the metadata information to color bubbles.
-#' @usage bubble_dbcan(tibble_ko, x_axis, y_axis,  
-#' data_experiment=NULL, color_character=NULL, order_bins=NULL,
-#' order_metabolism=NULL, color_pallet=NULL, range_size=NULL, 
-#' x_labs=TRUE, y_labs=TRUE, text_x=NULL, text_y=NULL)
-#' @param tibble_ko a tibble object, created with the read_dbcan 
+#' @usage bubble_domain(tibble_ko, x_axis, y_axis, data_experiment=NULL,
+#' color_character=NULL, order_bins=NULL, order_metabolism=NULL, 
+#' color_pallet=NULL, range_size=NULL, x_labs=TRUE, y_labs=TRUE,
+#' text_x=NULL, text_y=NULL)
+#' @param tibble_ko a tibble object, created with the mapping_ko 
+#' or get_subset_* functions. 
 #' @param x_axis a string, a column name of the metabolism table. 
 #' It determined the x axis label.
 #' @param y_axis a string, a column name of the metabolism table. 
@@ -29,32 +30,33 @@
 #' @param text_y optional. A numeric vector indicating the size
 #'  of the y text letters.
 #' @details This function is part of a package used for 
-#' the calc of bins metabolism.
+#' the analysis of bins metabolism.
 #' @import ggplot2 dplyr rlang pals
 #' @examples
 #' \dontrun{
-#' bubble_dbcan(tibble_ko)
+#' bubble_domain(tibble_ko=input_data, x_axis=Bin_name, y_axis=PFAM, 
+#' data_experiment=metadata, color_character=Genus)
 #' }
 #' @noRd
-bubble_dbcan<-function(tibble_ko,
-                    x_axis, 
-                    y_axis,
-                    data_experiment=NULL,
-                    color_character=NULL,
-                    order_bins=NULL,
-                    order_metabolism=NULL,
-                    color_pallet=NULL, 
-                    range_size=NULL,
-                    x_labs=NULL,
-                    y_labs=NULL,
-                    text_x=NULL,
-                    text_y=NULL){
+bubble_dbcan3<-function(tibble_ko,
+                        x_axis, 
+                        y_axis,
+                        data_experiment=NULL,
+                        color_character=NULL,
+                        order_bins=NULL,
+                        order_metabolism=NULL,
+                        color_pallet=NULL, 
+                        range_size=NULL,
+                        x_labs=TRUE,
+                        y_labs=TRUE,
+                        text_x=NULL,
+                        text_y=NULL){
   # Enquoting -------------------------------------------------------------####
-  x_axis_enquo <- rlang::enquo(x_axis)
-  y_axis_enquo <- rlang::enquo(y_axis)
-  x_axis_label <- rlang::as_label(x_axis_enquo)
-  y_axis_label <- rlang::as_label(y_axis_enquo)
-  color_character_enquo <-rlang:: enquo(color_character)
+  x_axis_enquo <- enquo(x_axis)
+  y_axis_enquo <- enquo(y_axis)
+  x_axis_label <- as_label(x_axis_enquo)
+  y_axis_label <- as_label(y_axis_enquo)
+  color_character_enquo <- enquo(color_character)
   # Checking axis ---------------------------------------------------------####
   if( x_axis_label  != "Bin_name") {
     y_axis_enquo<-enquo(x_axis) 
@@ -68,7 +70,7 @@ bubble_dbcan<-function(tibble_ko,
   }
   # Checking the size -----------------------------------------------------####
   if(is.null(range_size) == T){
-    range_size<-c(1,5)
+    range_size<-c(1,10)
   }
   # Checking the xlabs ----------------------------------------------------####
   if(isTRUE(x_labs) == T){
@@ -90,15 +92,24 @@ bubble_dbcan<-function(tibble_ko,
   if(is.null(text_y) == T){
     text_y<-7
   }
-  
+  # Table -----------------------------------------------------------------####
+  bubble<-tibble_ko %>%
+    select(-.data$dbCAN_names) %>%
+    pivot_longer(cols = -{{y_axis_enquo}}, names_to="Bin_name", 
+                 values_to = "Abundance") %>%
+    mutate_at('Abundance', as.integer) %>%
+    mutate(Abundance = case_when(
+      .data$Abundance == 0 ~ NA_integer_,
+      TRUE ~ as.integer(Abundance)
+    )) 
   # Join data experiment --------------------------------------------------####
   if(is.null(data_experiment) == F){
-   tibble_ko<-tibble_ko %>%
+    bubble<-bubble %>%
       left_join(data_experiment, by="Bin_name")
   }
   # Checking the order ---------------------------------------------------####
   if(is.null(order_metabolism) == T){
-    order_metabolism<-tibble_ko %>%
+    order_metabolism<-bubble %>%
       ungroup() %>%
       select({{y_axis_enquo}}) %>%
       distinct() %>%
@@ -106,7 +117,7 @@ bubble_dbcan<-function(tibble_ko,
   }
   # Checking the order ---------------------------------------------------####
   if(is.null(order_bins) == T){
-    order_bins<-sort(unique(tibble_ko$Bin_name))
+    order_bins<-sort(unique(bubble$Bin_name))
   }
   # Checking experiment ---------------------------------------------------####
   if(is.null(data_experiment) == T){
@@ -120,7 +131,7 @@ bubble_dbcan<-function(tibble_ko,
   y_axis_label <- as_label(y_axis_enquo)
   # Plot ------------------------------------------------------------------####
   if(x_axis_label == "Bin_name") {
-    plot_bubble<-ggplot(tibble_ko,
+    plot_bubble<-ggplot(bubble,
                         aes(x= factor(!!x_axis_enquo, 
                                       levels = !!order_bins),
                             y= factor(!!y_axis_enquo, 
@@ -137,9 +148,9 @@ bubble_dbcan<-function(tibble_ko,
                                        vjust = 1),
             axis.text.y = element_text(size=text_y))+
       xlab(x_labs) + 
-      ylab(y_axis_enquo)
+      ylab(y_labs)
   } else if (x_axis_label != "Bin_name" ) {
-    plot_bubble<-ggplot(tibble_ko,
+    plot_bubble<-ggplot(bubble,
                         aes(x= factor(!!x_axis_enquo, 
                                       levels = !!order_metabolism),
                             y= factor(!!y_axis_enquo, 
@@ -147,16 +158,16 @@ bubble_dbcan<-function(tibble_ko,
                             size= .data$Abundance,
                             color= !!color_character_enquo)) +
       geom_point(alpha=0.5) +
-      scale_size(range = c(1,5)) +
+      scale_size(range = range_size) +
       scale_color_manual(values = color_pallet) +
       theme_linedraw() +
       theme(axis.text.x = element_text(size=text_x, 
                                        angle = 45, 
                                        hjust = 1, 
                                        vjust = 1),
-            axis.text.y = element_text(size=text_y))+
+            axis.text.y = element_text(size=text_y)) +
       xlab(x_labs) + 
-      ylab(y_labs)
+      ylab(y_labs) 
   }
   
   return(plot_bubble)
