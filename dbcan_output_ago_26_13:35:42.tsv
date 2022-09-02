@@ -1,0 +1,36 @@
+Bin_name	dbCAN	domain_name	Signalp	Abundance
+htn_bins_104_sub	CBM2	carbohydrate-binding module [CBM]	N	1
+htn_bins_104_sub	CE12	carbohydrate esterases [CEs]	N	1
+htn_bins_104_sub	CE4	carbohydrate esterases [CEs]	N	1
+htn_bins_104_sub	GH0	glycoside hydrolases [GHs]	N	1
+htn_bins_104_sub	GH13	glycoside hydrolases [GHs]	N	1
+htn_bins_104_sub	GH140	glycoside hydrolases [GHs]	N	1
+htn_bins_104_sub	GH18	glycoside hydrolases [GHs]	N	1
+htn_bins_104_sub	GH25	glycoside hydrolases [GHs]	N	6
+htn_bins_104_sub	GH25	glycoside hydrolases [GHs]	Y(1-40)	3
+htn_bins_104_sub	GH77	glycoside hydrolases [GHs]	N	1
+htn_bins_104_sub	GH95	glycoside hydrolases [GHs]	N	4
+htn_bins_104_sub	GT111	glycosyltransferases [GTs]	N	1
+htn_bins_104_sub	GT2	glycosyltransferases [GTs]	N	25
+htn_bins_104_sub	GT28	glycosyltransferases [GTs]	N	1
+htn_bins_104_sub	GT35	glycosyltransferases [GTs]	N	1
+htn_bins_104_sub	GT51	glycosyltransferases [GTs]	N	4
+htn_bins_104_sub	PL1	polysaccharide lyases [PLs]	Y(1-37)	1
+htn_bins_104_sub	PL11	polysaccharide lyases [PLs]	N	1
+htn_bins_104_sub	PL9	polysaccharide lyases [PLs]	N	1
+htn_bins_108	CBM48	carbohydrate-binding module [CBM]	N	1
+htn_bins_108	GH13	glycoside hydrolases [GHs]	N	4
+htn_bins_108	GH18	glycoside hydrolases [GHs]	N	1
+htn_bins_108	GH2	glycoside hydrolases [GHs]	N	1
+htn_bins_108	GH3	glycoside hydrolases [GHs]	N	1
+htn_bins_108	GH77	glycoside hydrolases [GHs]	N	1
+htn_bins_108	GT0	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT1	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT2	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT26	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT28	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT35	glycosyltransferases [GTs]	N	4
+htn_bins_108	GT4	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT5	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT51	glycosyltransferases [GTs]	N	1
+htn_bins_108	GT84	glycosyltransferases [GTs]	N	1

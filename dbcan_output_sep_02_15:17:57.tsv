@@ -1,0 +1,28 @@
+dbCAN	domain_name	htn_bins_104_sub	htn_bins_108
+CBM2	carbohydrate-binding module [CBM]	1	0
+CBM48	carbohydrate-binding module [CBM]	0	1
+CE12	carbohydrate esterases [CEs]	1	0
+CE4	carbohydrate esterases [CEs]	1	0
+GH0	glycoside hydrolases [GHs]	1	0
+GH13	glycoside hydrolases [GHs]	1	4
+GH140	glycoside hydrolases [GHs]	1	0
+GH18	glycoside hydrolases [GHs]	1	1
+GH2	glycoside hydrolases [GHs]	0	1
+GH25	glycoside hydrolases [GHs]	9	0
+GH3	glycoside hydrolases [GHs]	0	1
+GH77	glycoside hydrolases [GHs]	1	1
+GH95	glycoside hydrolases [GHs]	4	0
+GT0	glycosyltransferases [GTs]	0	1
+GT1	glycosyltransferases [GTs]	0	1
+GT111	glycosyltransferases [GTs]	1	0
+GT2	glycosyltransferases [GTs]	25	1
+GT26	glycosyltransferases [GTs]	0	1
+GT28	glycosyltransferases [GTs]	1	1
+GT35	glycosyltransferases [GTs]	1	4
+GT4	glycosyltransferases [GTs]	0	1
+GT5	glycosyltransferases [GTs]	0	1
+GT51	glycosyltransferases [GTs]	4	1
+GT84	glycosyltransferases [GTs]	0	1
+PL1	polysaccharide lyases [PLs]	1	0
+PL11	polysaccharide lyases [PLs]	1	0
+PL9	polysaccharide lyases [PLs]	1	0

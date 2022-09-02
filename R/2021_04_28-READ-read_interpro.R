@@ -29,7 +29,7 @@ read_interpro<-function(data_interpro,
                                    "SUPERFAMILY", "SMART", "SFLD", "ProSiteProfiles",
                                    "ProSitePatterns", "ProDom", "PRINTS", "PIRSF", 
                                    "MobiDBLite","Hamap", "Gene3D", "Coils", "CDD"),
-                        profile=TRUE){
+                        profile=TRUE, write=FALSE){
   possible_databases<-c("TIGRFAM", "SUPERFAMILY", "SMART", "SFLD", "ProSiteProfiles",
                         "ProSitePatterns", "ProDom", "PRINTS", "PIRSF", "MobiDBLite",
                         "Hamap", "Gene3D", "Coils", "CDD", "Pfam")
@@ -113,6 +113,18 @@ read_interpro<-function(data_interpro,
       interpro<-table_interpro
     }
   }
+  
+  # Write data or not --------------------------------------------------------------####
+  
+  if(isTRUE(write)){
+    write_tsv(interpro, paste0("interpro_output_", format(Sys.time(), "%b_%d_%X"), ".tsv"))
+  }
+  else{
+    return(interpro)
+  }
+  
   # Return ----------------------------------------------------------------####
   return(interpro)
 }
+
+

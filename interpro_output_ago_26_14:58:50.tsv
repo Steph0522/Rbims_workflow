@@ -1,0 +1,82 @@
+Scaffold_name	Bin_name	Pfam	domain_name	Abundance
+Bin_10_scaffold_441_c1_24	Bin_10	PF03595	Voltage-dependent anion channel	1
+Bin_12_scaffold_69_c1_124	Bin_12	PF03595	Voltage-dependent anion channel	1
+Bin_56_scaffold_71_c1_69	Bin_56	PF03595	Voltage-dependent anion channel	1
+Bin_113_scaffold_145_c1_85	Bin_113	PF00440	Bacterial regulatory proteins, tetR family	1
+Bin_113_scaffold_145_c1_85	Bin_113	PF13305	WHG domain	1
+Bin_1_scaffold_146_c1_1	Bin_1	PF00440	Bacterial regulatory proteins, tetR family	1
+Bin_1_scaffold_146_c1_1	Bin_1	PF13305	WHG domain	1
+Bin_2_scaffold_42_c1_56	Bin_2	PF01131	DNA topoisomerase	1
+Bin_2_scaffold_42_c1_56	Bin_2	PF08272	Topoisomerase I zinc-ribbon-like	1
+Bin_2_scaffold_42_c1_56	Bin_2	PF01751	Toprim domain	1
+Bin_2_scaffold_42_c1_56	Bin_2	PF01396	Topoisomerase DNA binding C4 zinc finger	1
+Bin_10_scaffold_42_c1_180	Bin_10	PF01131	DNA topoisomerase	1
+Bin_10_scaffold_42_c1_180	Bin_10	PF08272	Topoisomerase I zinc-ribbon-like	1
+Bin_10_scaffold_42_c1_180	Bin_10	PF01751	Toprim domain	1
+Bin_10_scaffold_42_c1_180	Bin_10	PF01396	Topoisomerase DNA binding C4 zinc finger	1
+Bin_1_scaffold_301_c1_13	Bin_1	PF13448	Domain of unknown function (DUF4114)	1
+Bin_1_scaffold_301_c1_13	Bin_1	PF07589	PEP-CTERM motif	1
+Bin_113_scaffold_330_c1_13	Bin_113	PF13448	Domain of unknown function (DUF4114)	1
+Bin_113_scaffold_330_c1_13	Bin_113	PF07589	PEP-CTERM motif	1
+Bin_12_scaffold_4307_c1_2	Bin_12	PF13448	Domain of unknown function (DUF4114)	1
+Bin_12_scaffold_4307_c1_2	Bin_12	PF07589	PEP-CTERM motif	1
+Bin_56_scaffold_17_c1_62	Bin_56	PF01026	TatD related DNase	1
+Bin_113_scaffold_66_c1_109	Bin_113	PF00701	Dihydrodipicolinate synthetase family	1
+Bin_1_scaffold_21_c1_109	Bin_1	PF00701	Dihydrodipicolinate synthetase family	1
+Bin_2_scaffold_3_c1_159	Bin_2	PF01293	Phosphoenolpyruvate carboxykinase	1
+Bin_10_scaffold_12_c1_150	Bin_10	PF01293	Phosphoenolpyruvate carboxykinase	1
+Bin_10_scaffold_107_c2_32	Bin_10	PF00156	Phosphoribosyl transferase domain	1
+Bin_56_scaffold_60_c1_58	Bin_56	PF00156	Phosphoribosyl transferase domain	2
+Bin_12_scaffold_62_c1_149	Bin_12	PF00156	Phosphoribosyl transferase domain	1
+Bin_56_scaffold_179_c1_32	Bin_56	PF00156	Phosphoribosyl transferase domain	2
+Bin_10_scaffold_286_c1_25	Bin_10	PF00665	Integrase core domain	2
+Bin_2_scaffold_192_c1_33	Bin_2	PF00665	Integrase core domain	2
+Bin_10_scaffold_286_c1_30	Bin_10	PF00665	Integrase core domain	2
+Bin_2_scaffold_192_c1_28	Bin_2	PF00665	Integrase core domain	2
+Bin_113_scaffold_65_c1_124	Bin_113	PF00196	Bacterial regulatory proteins, luxR family	1
+Bin_113_scaffold_65_c1_124	Bin_113	PF00072	Response regulator receiver domain	1
+Bin_1_scaffold_38_c1_83	Bin_1	PF00196	Bacterial regulatory proteins, luxR family	1
+Bin_1_scaffold_38_c1_83	Bin_1	PF00072	Response regulator receiver domain	1
+Bin_2_scaffold_65_c1_83	Bin_2	PF00196	Bacterial regulatory proteins, luxR family	1
+Bin_2_scaffold_65_c1_83	Bin_2	PF00072	Response regulator receiver domain	1
+Bin_10_scaffold_60_c1_83	Bin_10	PF00196	Bacterial regulatory proteins, luxR family	1
+Bin_10_scaffold_60_c1_83	Bin_10	PF00072	Response regulator receiver domain	1
+Bin_12_scaffold_22_c1_103	Bin_12	PF12833	Helix-turn-helix domain	1
+Bin_56_scaffold_234_c1_2	Bin_56	PF10458	Valyl tRNA synthetase tRNA binding arm	1
+Bin_56_scaffold_234_c1_2	Bin_56	PF00133	tRNA synthetases class I (I, L, M and V)	1
+Bin_56_scaffold_234_c1_2	Bin_56	PF08264	Anticodon-binding domain of tRNA	1
+Bin_113_scaffold_49_c1_1	Bin_113	PF16078	2-oxoglutarate dehydrogenase N-terminus	1
+Bin_113_scaffold_49_c1_1	Bin_113	PF00676	Dehydrogenase E1 component	1
+Bin_113_scaffold_49_c1_1	Bin_113	PF02779	Transketolase, pyrimidine binding domain	1
+Bin_113_scaffold_49_c1_1	Bin_113	PF16870	2-oxoglutarate dehydrogenase C-terminal	1
+Bin_1_scaffold_56_c1_32	Bin_1	PF16078	2-oxoglutarate dehydrogenase N-terminus	1
+Bin_1_scaffold_56_c1_32	Bin_1	PF00676	Dehydrogenase E1 component	1
+Bin_1_scaffold_56_c1_32	Bin_1	PF02779	Transketolase, pyrimidine binding domain	1
+Bin_1_scaffold_56_c1_32	Bin_1	PF16870	2-oxoglutarate dehydrogenase C-terminal	1
+Bin_12_scaffold_873_c1_6	Bin_12	PF08241	Methyltransferase domain	1
+Bin_113_scaffold_138_c1_50	Bin_113	PF08241	Methyltransferase domain	1
+Bin_1_scaffold_142_c1_50	Bin_1	PF08241	Methyltransferase domain	1
+Bin_113_scaffold_358_c1_15	Bin_113	PF01325	Iron dependent repressor, N-terminal DNA binding domain	1
+Bin_113_scaffold_358_c1_15	Bin_113	PF04023	FeoA domain	1
+Bin_113_scaffold_358_c1_15	Bin_113	PF02742	Iron dependent repressor, metal binding and dimerisation domain	1
+Bin_1_scaffold_4_c1_15	Bin_1	PF01325	Iron dependent repressor, N-terminal DNA binding domain	1
+Bin_1_scaffold_4_c1_15	Bin_1	PF04023	FeoA domain	1
+Bin_1_scaffold_4_c1_15	Bin_1	PF02742	Iron dependent repressor, metal binding and dimerisation domain	1
+Bin_113_scaffold_81_c1_53	Bin_113	PF09334	tRNA synthetases class I (M)	1
+Bin_113_scaffold_81_c1_53	Bin_113	PF08264	Anticodon-binding domain of tRNA	1
+Bin_113_scaffold_81_c1_53	Bin_113	PF01588	Putative tRNA binding domain	1
+Bin_1_scaffold_4_c1_379	Bin_1	PF09334	tRNA synthetases class I (M)	1
+Bin_1_scaffold_4_c1_379	Bin_1	PF08264	Anticodon-binding domain of tRNA	1
+Bin_1_scaffold_4_c1_379	Bin_1	PF01588	Putative tRNA binding domain	1
+Bin_2_scaffold_4_c1_295	Bin_2	PF07690	Major Facilitator Superfamily	1
+Bin_10_scaffold_5_c1_378	Bin_10	PF07690	Major Facilitator Superfamily	1
+Bin_10_scaffold_10_c1_251	Bin_10	PF02547	Queuosine biosynthesis protein	1
+Bin_2_scaffold_12_c2_265	Bin_2	PF02547	Queuosine biosynthesis protein	1
+Bin_113_scaffold_37_c2_78	Bin_113	PF00625	Guanylate kinase	1
+Bin_1_scaffold_4_c1_140	Bin_1	PF00625	Guanylate kinase	1
+Bin_1_scaffold_125_c1_83	Bin_1	PF01966	HD domain	1
+Bin_1_scaffold_125_c1_83	Bin_1	PF01909	Nucleotidyltransferase domain	1
+Bin_1_scaffold_125_c1_83	Bin_1	PF08335	GlnD PII-uridylyltransferase	1
+Bin_113_scaffold_86_c1_133	Bin_113	PF01966	HD domain	1
+Bin_113_scaffold_86_c1_133	Bin_113	PF01909	Nucleotidyltransferase domain	1
+Bin_113_scaffold_86_c1_133	Bin_113	PF08335	GlnD PII-uridylyltransferase	1

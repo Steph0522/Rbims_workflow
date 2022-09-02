@@ -17,7 +17,7 @@
 #' }
 #' @export
 
-read_dbcan3<-function(dbcan_path, write=FALSE, matrix=FALSE){
+read_dbcan3<-function(dbcan_path, write=FALSE, profile=TRUE){
   ruta_dbcan<-dbcan_path
   # Load all the data tables results ---------------------------------------####
   lapply_read_delim_bind_rows <- function(path, pattern = "*overview.txt"){
@@ -51,16 +51,16 @@ read_dbcan3<-function(dbcan_path, write=FALSE, matrix=FALSE){
                                str_detect(.data$dbCAN_names, "PL") ~ 
                                  "polysaccharide lyases [PLs]")) %>%
       mutate_if(is.character, str_trim) %>%
-      dplyr::select(.data$Bin_name, .data$dbCAN_names,.data$Signalp ) %>%
+      dplyr::select(.data$Bin_name, .data$dbCAN_names, domain_name=.data$dbCAN, .data$Signalp ) %>%
       calc_abundance(analysis = "dbCAN") %>% 
       dplyr::select(-.data$Scaffold_name)) %>% group_by(
-        Bin_name,dbCAN, Signalp) %>% summarise_if(is.numeric, sum) #juntando
+        Bin_name,dbCAN,  domain_name, Signalp) %>% summarise_if(is.numeric, sum) #juntando
   
   # Reformating data ----------------------------------------------------------####
   
-  dbcan_df_reformat<-dbcan_df_format %>%dplyr::select(
+  dbcan_df_reformat <-dbcan_df_format %>%dplyr::select(
     -Signalp) %>%
-    mutate(dbCAN_names = case_when(str_detect(.data$dbCAN, "CBM") ~ 
+    mutate(domain_name = case_when(str_detect(.data$dbCAN, "CBM") ~ 
                                      "carbohydrate-binding module [CBM]",
                                    str_detect(.data$dbCAN, "CE") ~ 
                                      "carbohydrate esterases [CEs]",
@@ -70,12 +70,12 @@ read_dbcan3<-function(dbcan_path, write=FALSE, matrix=FALSE){
                                      "glycosyltransferases [GTs]",
                                    str_detect(.data$dbCAN, "PL") ~ 
                                      "polysaccharide lyases [PLs]")) %>% group_by(
-                                       dbCAN, Bin_name, dbCAN_names) %>% summarize_if(
+                                       dbCAN, Bin_name, domain_name) %>% summarize_if(
                                          is.numeric, sum) %>%   pivot_wider(
                                            names_from = "Bin_name", values_from = "Abundance") %>% ungroup() %>% mutate_if(
                                              is.numeric, ~replace(., is.na(.), 0)) 
   
-  # Menssage --------------------------------------------------------------####
+  # Messages --------------------------------------------------------------####
   initial<-dim(dbcan_df)
   final<-dim(dbcan_df %>%
                filter( .data$`#ofTools` >1))
@@ -89,20 +89,26 @@ read_dbcan3<-function(dbcan_path, write=FALSE, matrix=FALSE){
   print(paste0("Number of genes with signals = " , sum(signals[-1,]$n)))
   print(paste0("Number of genes with signals that passed filtering = " , sum(signals2[-1,]$n)))
   
-  if(  write == TRUE) {
-    write_tsv(dbcan_df_format, "dbcan_output_formated.tsv")    
-    
-  } 
-  if(  matrix == TRUE) {
-    return(dbcan_df_format)
-    
-  }  else {
-    return(dbcan_df_reformat)
-    
-  } 
+# Profile or not --------------------------------------------------------------####
   
+  if(isTRUE(profile)){
+    output<-dbcan_df_reformat
+  } else{
+    output<-dbcan_df_format
+  }
 
+
+# Write data or not --------------------------------------------------------------####
+
+  if(isTRUE(write)){
+    write_tsv(output, paste0("dbcan_output_", format(Sys.time(), "%b_%d_%X"), ".tsv"))
+  }
+ else{
+   return(output)
+ }
+  
+  # Return ----------------------------------------------------------------####
+  return(output)
 }
-
 
 

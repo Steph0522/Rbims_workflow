@@ -23,7 +23,7 @@
 #' @export
 read_ko<-function(data_kofam=NULL, 
                   data_kaas=NULL, 
-                  data_interpro=NULL){
+                  data_interpro=NULL, write=FALSE){
   # Kofam_fun -------------------------------------------------------------####
   if( is.null(data_kofam) == F && is.null(data_kaas) == F || 
       is.null(data_kofam) == F){
@@ -91,6 +91,20 @@ read_ko<-function(data_kofam=NULL,
   if( is.null(data_kaas) == F){
     tabla_to_print<-calc_abundance(table_KAAS, analysis="KEGG")
   }
+
+  # Write data or not --------------------------------------------------------------####
   
+  if(isTRUE(write)){
+    write_tsv(tabla_to_print, paste0("ko_output_", format(Sys.time(), "%b_%d_%X"), ".tsv"))
+  }
+  else{
+    return(tabla_to_print)
+  }
+  
+  # Return ----------------------------------------------------------------####
   return(tabla_to_print)
 }
+
+
+
+
