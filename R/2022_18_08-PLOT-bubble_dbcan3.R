@@ -94,7 +94,7 @@ bubble_dbcan3<-function(tibble_ko,
   }
   # Table -----------------------------------------------------------------####
   bubble<-tibble_ko %>%
-    select(-.data$dbCAN_names) %>%
+    select(-.data$domain_name) %>%
     pivot_longer(cols = -{{y_axis_enquo}}, names_to="Bin_name", 
                  values_to = "Abundance") %>%
     mutate_at('Abundance', as.integer) %>%

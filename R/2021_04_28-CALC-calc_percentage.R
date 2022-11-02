@@ -22,10 +22,11 @@ calc_percentage<-function(tibble_ko,
                     "Pathway_description", "Genes", 
                     "Gene_description", "Enzyme", "Cycle", "Pathway_cycle",
                     "Detail_cycle", "rbims_pathway", "rbims_sub_pathway", 
-                    "KO")
+                    "KO", "dbCAN", "domain_name", "Pfam")
+  
   # Transform from wide to long -------------------------------------------####
   Kegg_long<- tibble_ko %>%
-    pivot_longer(cols = -all_of(data_to_select), 
+    pivot_longer(cols = -any_of(data_to_select), 
                  values_to = "Abundance",
                  names_to="Bin_name") %>%
     distinct()

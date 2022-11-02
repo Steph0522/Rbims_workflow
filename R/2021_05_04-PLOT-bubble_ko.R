@@ -8,14 +8,14 @@
 #' order_metabolism=NULL, color_pallet=NULL, range_size=NULL, 
 #' x_labs=TRUE, y_labs=TRUE, text_x=NULL, text_y=NULL)
 #' @param tibble_ko a tibble object, created with the mapping_ko 
-#' or get_subset_* functions. 
+#' get_subset_* functions or with importing functions. 
 #' @param x_axis a string, a column name of the metabolism table. 
 #' It determined the x axis label.
 #' @param y_axis a string, a column name of the metabolism table. 
 #' It determined the y axis label.
 #' @param calc a character indicating with type of calc should 
 #' be done to plot the results. Valid values are "Abundance", "Binary", 
-#' "Percentage", and "None". If you chose none you are spected to use a
+#' "Percentage", and "None". If you chose none you are expected to use a
 #' tibble table obtained from calc_binary or calc_percentage. 
 #' @param data_experiment optional. a data frame object 
 #' containing metadata information.
@@ -104,7 +104,7 @@ bubble_ko<-function(tibble_ko,
     tibble_ko_mod<-calc_binary(tibble_ko, !!y_axis_enquo) %>%
       rename(tmp = .data$Presence_absence)
   } else if (calc == "Percentage") {
-    tibble_ko_mod<-calc_percentage(tibble_ko, !!y_axis_enquo) %>%
+    tibble_ko_mod<-calc_percentage2(tibble_ko, !!y_axis_enquo) %>%
       rename(tmp = .data$Percentage)
   } else if (calc == "None") {
     if( "Presence_absence" %in% colnames(tibble_ko)){

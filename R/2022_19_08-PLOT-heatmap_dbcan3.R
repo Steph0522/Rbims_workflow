@@ -1,12 +1,11 @@
-#' @title Heatmap plot of PFAM/INTERPRO.
-#' @description Creates a heatmap of PFAM/INTERPRO of the abundance,
-#' presence and absence data or a percentage.
-#' @usage heatmap_domain(tibble_ko, y_axis, scale_option=NULL, 
+#' @title Heatmap plot of DBCAN.
+#' @description Creates a heatmap of DBCAN of the abundance data.
+#' @usage heatmap_dbCAN3(tibble_ko, y_axis, scale_option=NULL, 
 #' color_pallet=NULL, distance=FALSE)
 #' @param tibble_ko a tibble object. It could have been
-#' created with the read_interpro or get_subset_* functions.
+#' created with the read_dbcan3 or get_subset_* functions.
 #' @param y_axis a string. A column name of the tibble_ko of a 
-#' feature to plot (i.e. PFAM/INTERPRO).
+#' feature to plot (i.e. dbCAN/domain_name).
 #' @param scale_option a character indicating if rows or columns should be
 #' scale. Valid options "none", "row" or "column".
 #' @param color_pallet optional. a character vector of colors to use.
@@ -17,7 +16,7 @@
 #' @import pheatmap rlang dplyr tidyr tibble
 #' @examples
 #' \dontrun{
-#' heatmap_domain(input_data_profile, y_axis=PFAM, 
+#' heatmap_dbCAN3(input_data_profile, y_axis=PFAM, 
 #' scale_option="none", distance=T)
 #' }
 #' @noRd
@@ -43,7 +42,7 @@ heatmap_dbCAN3<-function(tibble_ko,
   }
   # Preparing dataframe ---------------------------------------------------####
   heatmap_domain_table<-tibble_ko %>%
-    select(-.data$dbCAN_names) %>%
+    select(-.data$domain_name) %>%
     column_to_rownames({{y_axis_label}})
   # Checking distance -----------------------------------------------------####
   if(isTRUE(distance) == T) {
