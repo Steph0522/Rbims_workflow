@@ -1,4 +1,4 @@
-#' @title Bubble plot of PFAM/INTERPRO and its relative abundance 
+#' @title Bubble plot of DBCAN and its relative abundance 
 #' within each bin.
 #' @description Creates a bubble plot of PFAM/INTERPRO relative 
 #' abundance within each bin. 

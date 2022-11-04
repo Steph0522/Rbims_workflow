@@ -1,15 +1,18 @@
-#' @title Read the output of dbCAN
+#' @title Read the output of dbCAN and extract abundance profile 
 #' @description read_dbcan3 calculates the abundance of each Gene within the 
 #' bins based on the dbCAN output from run_dbcan3 V3.0.6. 
-#' @usage read_dbcan(dbcan_path)
+#' @usage read_dbcan(dbcan_path, profile=F, write=F)
 #' @param dbcan_path a path where dbCAN output data are. They 
 #' should have the extension overview.txt and all files in the path are the ones that
 #' need to be read. Output data should have 6 columns with the bin names 
 #' followed by the Genes obtained in every algorithm (HMMER,Hotpep,DIAMOND), 
 #' column 'Signalp' indcating if a Peptide signal is found and a column 
 #' '#ofTools" indicating the number of algorithms that found this Gene. 
-#' @param write logical. If TRUE then the dataframe generated will be saved in 
-#' the directory you are currently working 
+#' @param profile a logical value indicating if you want to print a profile 
+#' or not.
+#' @param write  a logical value indicating to save the data imported 
+#' as a formatted table with .tsv extension with a time stamp and it will be 
+#' located in your current workin directory
 #' @import dplyr tidyr readr stringr rlang tidyselect
 #' @examples
 #' \dontrun{

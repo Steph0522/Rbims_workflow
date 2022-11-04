@@ -1,30 +1,24 @@
-#' @title Extract abundance profile of InterProScan output.
-#' @description Reads a table object created with InterProScan and generates
-#' a profile table of abundance with the hits of the KEGG, PFAM or 
-#' INTERPRO databases. The output of KEGG database can be used within 
-#' mapping_ko.
-#' @usage read_interpro(data_interpro, 
-#' database=c("KEGG", "Pfam", "INTERPRO",
-#' "TIGRFAM", "SUPERFAMILY", "SMART", "SFLD", "ProSiteProfiles",
-#' "ProSitePatterns", "ProDom", "PRINTS", "PIRSF", 
-#' "MobiDBLite","Hamap", "Gene3D", "Coils", "CDD"), profile = TRUE)
-#' @param data_interpro a table, output of InterProScan on tsv format.
-#' InterProScan should have been run with -pa option to be able to use the 
-#' KEGG option, in the database argument.
+#' @title Read the output of PICRUSt2 
+#' @description read a table created in PICRUSt2 and gives format to downstream analysis
+#' @usage read_picrust2(data_picrust2, database= c("KO", "EC", "pathway"),
+#' profile=TRUE, write=FALSE)
+#' @param data_picrust2 a table, output of PICRUSt2 on tsv format.
 #' @param database a character indicating for which database do you want to
-#' get the abundance profile. Valid options are "KEGG", "PFAM" or "INTERPRO".
+#' get the abundance profile. Valid options are "KO", "EC" or "pathway".
 #' @param profile a logical value indicating if you want to print a profile 
-#' or not. This option is valid for "PFAM" and "INTERPRO" database. 
+#' or not.
+#' @param write  a logical value indicating to save the data imported 
+#' as a formatted table with .tsv extension with a time stamp
 #' @details This function is part of a package used for the analysis of bins 
 #' metabolism.
 #' @import tibble dplyr stringr tidyr janitor rlang
 #' @examples
 #' \dontrun{
-#' read_interpro(data_interpro="inst/extdata/Interpro_test.tsv", database="INTERPRO", 
-#' profile = F)
+#' read_interpro(data_picrust2="inst/extdata/pred_metagenome_unstrat.tsv", 
+#' database="KO", profile = F, write=F)
 #' }
 #' @export
-read_picrust2<-function(data_picrust, 
+read_picrust2<-function(data_picrust2, 
                         profile=TRUE, write=FALSE,
                         database= c("KO", "EC", "pathway")){
 # Extract functions or gene----------------------------------------------####

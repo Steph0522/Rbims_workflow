@@ -2,9 +2,9 @@
 % Please edit documentation in R/2022_08_15-READ-read_dbCAN3.R
 \name{read_dbcan3}
 \alias{read_dbcan3}
-\title{Read the output of dbCAN}
+\title{Read the output of dbCAN and extract abundance profile}
 \usage{
-read_dbcan(dbcan_path)
+read_dbcan(dbcan_path, profile=F, write=F)
 }
 \arguments{
 \item{dbcan_path}{a path where dbCAN output data are. They
@@ -14,8 +14,12 @@ followed by the Genes obtained in every algorithm (HMMER,Hotpep,DIAMOND),
 column 'Signalp' indcating if a Peptide signal is found and a column
 '#ofTools" indicating the number of algorithms that found this Gene.}
 
-\item{write}{logical. If TRUE then the dataframe generated will be saved in
-the directory you are currently working}
+\item{write}{a logical value indicating to save the data imported
+as a formatted table with .tsv extension with a time stamp and it will be
+located in your current workin directory}
+
+\item{profile}{a logical value indicating if you want to print a profile
+or not.}
 }
 \description{
 read_dbcan3 calculates the abundance of each Gene within the

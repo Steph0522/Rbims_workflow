@@ -1,5 +1,5 @@
 #' @title Calculate presence/absence.
-#' @description  Calculate the  presence/absence of KO in certain pathway.
+#' @description  Calculate the  presence/absence of data in certain pathway.
 #' @usage calc_binary(tibble_ko, y_axis, data_experiment=NULL, binary=TRUE,
 #' metabolism=FALSE)
 #' @param tibble_ko a tibble object from mapping_ko.

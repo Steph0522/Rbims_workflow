@@ -7,21 +7,25 @@
 #' database=c("KEGG", "Pfam", "INTERPRO",
 #' "TIGRFAM", "SUPERFAMILY", "SMART", "SFLD", "ProSiteProfiles",
 #' "ProSitePatterns", "ProDom", "PRINTS", "PIRSF", 
-#' "MobiDBLite","Hamap", "Gene3D", "Coils", "CDD"), profile = TRUE)
+#' "MobiDBLite","Hamap", "Gene3D", "Coils", "CDD"), 
+#' profile = TRUE, write = FALSE)
 #' @param data_interpro a table, output of InterProScan on tsv format.
 #' InterProScan should have been run with -pa option to be able to use the 
 #' KEGG option, in the database argument.
 #' @param database a character indicating for which database do you want to
 #' get the abundance profile. Valid options are "KEGG", "PFAM" or "INTERPRO".
 #' @param profile a logical value indicating if you want to print a profile 
-#' or not. This option is valid for "PFAM" and "INTERPRO" database. 
+#' or not. This option is valid for "PFAM" and "INTERPRO" database
+#' @param write  a logical value indicating to save the data imported 
+#' as a formatted table with .tsv extension with a time stamp and it will be 
+#' located in your current workin directory
 #' @details This function is part of a package used for the analysis of bins 
 #' metabolism.
 #' @import tibble dplyr stringr tidyr janitor rlang
 #' @examples
 #' \dontrun{
-#' read_interpro(data_interpro="inst/extdata/Interpro_test.tsv", database="INTERPRO", 
-#' profile = F)
+#' read_interpro(data_interpro="inst/extdata/Interpro_test.tsv", 
+#' database="INTERPRO", profile = F, write= F)
 #' }
 #' @export
 read_interpro<-function(data_interpro, 

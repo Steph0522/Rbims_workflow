@@ -191,7 +191,24 @@ bubble_ko<-function(tibble_ko,
             axis.text.y = element_text(size=text_y))+
       xlab(x_labs) + 
       ylab(y_labs)
+    
   }
   
-  return(plot_bubble)
+  # Check calc plot --------------------------------------------------------####
+  if(calc == "Abundance"){
+    Table_with_percentage<-Table_with_percentage %>%
+      rename(Abundance = tmp)
+    plot_bubble <- suppressMessages(plot_bubble + guides(size=guide_legend(title="Abundance")))
+  } else if (calc == "Binary") {
+    Table_with_percentage<-Table_with_percentage %>%
+      rename("Presence/Absence" = tmp)
+    plot_bubble <- suppressMessages(plot_bubble + scale_size_continuous(name="", labels = "Present"))
+  } else if (calc == "Percentage") {
+    Table_with_percentage<-Table_with_percentage %>%
+      rename(Percentage = tmp)
+    plot_bubble <- suppressMessages(plot_bubble + guides(size=guide_legend(title="Percentage")))
+  } else if (calc == "None") {
+    plot_bubble<- plot_bubble
+    }
+  suppressWarnings(return(plot_bubble))
 }

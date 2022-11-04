@@ -1,0 +1,30 @@
+---
+title: "Rbims: R tools for reconstructing bin metabolisms."
+author:
+- name: Mirna Vázquez-Rosas-Landa
+  affiliation:  Unidad Académica de Ecología y Biodiversidad Acuática, UNAM, Ciudad de México, México
+- name: Stephanie Hereira-Pacheco
+  affiliation: Estación Científica La Malinche, Centro Tlaxcala de Biología de la Conducta, Universidad Autónoma de Tlaxcala, Tlaxcala, México
+  email: mvazquez@cmarl.unam.mx
+package: rbims
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
+abstract: |
+  Instructions on installing and using importing and visualization data of functional annotation of genomes and MAGs (Metagenome-Assembled genomes).
+vignette: |
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
+```
+
+```{r child = './Installation.Rmd'}
+```
+
+```{r child = './Create_Interpro_profile.Rmd'}
+```
+

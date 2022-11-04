@@ -1,5 +1,5 @@
 #' @title Calculate the percentage.
-#' @description  Calculate the percentage of KO in certain pathway.
+#' @description  Calculate the percentage of data in certain pathway.
 #' @usage calc_percentage(tibble_ko, y_axis, data_experiment=NULL)
 #' @param tibble_ko a tibble object from mapping_ko.
 #' @param y_axis a character, indicating the pathway to analyze.
