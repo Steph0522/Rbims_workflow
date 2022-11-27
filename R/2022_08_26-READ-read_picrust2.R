@@ -23,7 +23,7 @@ read_picrust2<-function(data_picrust2,
                         database= c("KO", "EC", "pathway")){
 # Extract functions or gene----------------------------------------------####
     table_picrust<-suppressWarnings(
-      suppressMessages(read_delim(data_picrust,
+      suppressMessages(read_delim(data_picrust2,
                                   delim="\t", 
                                   col_names = T)  )) 
 # Choosing database----------------------------------------------####
