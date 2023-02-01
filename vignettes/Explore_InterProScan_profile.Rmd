@@ -17,11 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-First, load the rbims package.
 
-```{r setup, eval=FALSE}
-library(rbims)
-```
 
 # Example with PFAM database
 
@@ -30,7 +26,7 @@ First, I will read the InterProScan output in a long format and extract the PFAM
 If you want to follow this example, you can download the use rbims [test](https://github.com/mirnavazquez/RbiMs/blob/main/inst/extdata/Interpro_test.tsv) file. 
 
 ```{r, eval=FALSE}
-interpro_pfam_long<-read_interpro(data_interpro = "Interpro_test.tsv", database="Pfam", profile = F)
+interpro_pfam_long<-read_interpro(data_interpro = "../inst/extdata/Interpro_test.tsv", database="Pfam", profile = F)
 ```
 
 You can use the [subsetting functions](https://mirnavazquez.github.io/RbiMs/articles/Explore_KEGG_profile.html#metabolism-subsetting-1) to create subsets of the InterPro profile table. Here, we will extract the most important PFAMs, and we need to use them as an input, not the profile output from read_interpro. 
@@ -38,7 +34,7 @@ You can use the [subsetting functions](https://mirnavazquez.github.io/RbiMs/arti
 The function [get_subset_pca](https://mirnavazquez.github.io/RbiMs/reference/get_subset_pca.html) calculates a PCA over the data to find the PFAM that explains the variation within the data.
 
 ```{r}
-important_PFAMs<-get_subset_pca(tibble_rbims=interpro_pfam_profile, 
+important_PFAMs<-get_subset_pca (tibble_rbims=interpro_pfam_profile, 
                cos2_val=0.95,
                analysis="PFAM")
 ```
@@ -71,20 +67,24 @@ plot_heatmap(important_PFAMs, y_axis=PFAM, analysis = "INTERPRO", distance = F)
 We can also visualize using a bubble plot. 
 
 ```{r}
-plot_bubble(important_PFAMs, 
-            y_axis=PFAM, 
+plot_bubble(tibble_ko = important_PFAMs, 
+            y_axis= PFAM, 
             x_axis=Bin_name, 
             analysis = "INTERPRO", 
+            calc = "Percentage",
             data_experiment = metadata, 
             color_character = Clades)
+
+
+
 ```
 
 # Example with INTERPRO database
 
 First, I will read the InterProScan output in a wide format and extract the PFAM abundance information.
 
-```{r, eval=FALSE}
-interpro_INTERPRO_profile<-read_interpro(data_interpro = "Interpro_test.tsv", database="INTERPRO", profile = F)
+```{r, eval=TRUE}
+interpro_INTERPRO_profile<-read_interpro(data_interpro = "../inst/extdata/Interpro_test.tsv", database="INTERPRO", profile = F)
 ```
 
 
@@ -111,13 +111,17 @@ head(DNA_tipo_INTERPRO)
 
 We can create a bubble plot to visualize the distribution of these enzymes across the bins.
 
-```{r}
+```{r, eval=FALSE}
 plot_bubble(DNA_tipo_INTERPRO, 
             y_axis=INTERPRO,
             x_axis=Bin_name,
             analysis = "INTERPRO", 
+            calc== "Percentage",
             data_experiment = metadata, 
             color_character = Sample_site)
+
+
+
 ```
 
 # Example with KEGG database

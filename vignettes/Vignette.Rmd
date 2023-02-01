@@ -28,3 +28,17 @@ BiocStyle::markdown()
 ```{r child = './Create_Interpro_profile.Rmd'}
 ```
 
+```{r child = './Create_KEGG_profile.Rmd'}
+```
+
+```{r child = './Create_dbcan_profile.Rmd'}
+```
+
+```{r child = './Create_picrust2_profile.Rmd'}
+```
+
+```{r child = './Explore_KEGG_profile.Rmd'}
+```
+
+```{r child = './Explore_InterProScan_profile.Rmd'}
+```

@@ -15,11 +15,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-First, load the rbims package.
-
-```{r setup}
-library(rbims)
-```
 
 The second thing to do would be to read the
 metadata file and the [KofamKOALA/KofamScan](https://github.com/mirnavazquez/RbiMs/blob/main/inst/extdata/KEGG_bins.txt) output. The metadata file is a tab-separated file containing the name of your bins and any extra information you would like to use for

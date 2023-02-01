@@ -58,3 +58,5 @@ You can export this to a table like this:
 ```{r, eval=FALSE}
 write.table(interpro_pfam_long, "Interpro.tsv", quote = F, sep = "\t", row.names = F, col.names = T)
 ```
+
+Or setting write  **write = T**. 
